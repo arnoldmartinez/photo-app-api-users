@@ -20,12 +20,12 @@ the port on the URL is the API gateway (https://github.com/arnoldmartinez/photo-
 
 In the h2 database login put:
 
-"Saved Settings": "Generic H2 (Embeded)"
-"Setting Name":   "Generic H2 (Embeded)"
-"Driver Class":   "org.h2.Driver"
-"JDBC URL":       "jdbc:h2:mem:testdb"
-"User Name":      "sa"
-"Password":
+- "Saved Settings": "Generic H2 (Embeded)"
+- "Setting Name":   "Generic H2 (Embeded)"
+- "Driver Class":   "org.h2.Driver"
+- "JDBC URL":       "jdbc:h2:mem:testdb"
+- "User Name":      "sa"
+- "Password":
 
 
 
