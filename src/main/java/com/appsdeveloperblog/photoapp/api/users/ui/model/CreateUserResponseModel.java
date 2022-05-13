@@ -1,9 +1,21 @@
 package com.appsdeveloperblog.photoapp.api.users.ui.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Objects;
+
 public class CreateUserResponseModel {
+
+    @JsonProperty("firstName")
     private String firstName;
+
+    @JsonProperty("lastName")
     private String lastName;
+
+    @JsonProperty("email")
     private String email;
+
+    @JsonProperty("userId")
     private String userId;
 
     public String getFirstName() {
@@ -36,5 +48,28 @@ public class CreateUserResponseModel {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CreateUserResponseModel that = (CreateUserResponseModel) o;
+        return Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(userId, that.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, email, userId);
+    }
+
+    @Override
+    public String toString() {
+        return "CreateUserResponseModel{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", userId='" + userId + '\'' +
+                '}';
     }
 }
