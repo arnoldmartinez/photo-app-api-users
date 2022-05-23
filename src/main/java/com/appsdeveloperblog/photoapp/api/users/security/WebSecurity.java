@@ -15,7 +15,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private Environment environment;
+
     private UserService usersService;
+
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
@@ -29,7 +31,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/**").hasIpAddress(environment.getProperty("gateway.ip"))
-                .and().addFilter(getAuthenticationFilter());
+        .and()
+        .addFilter(getAuthenticationFilter());
         http.headers().frameOptions().disable();
     }
 
@@ -37,6 +40,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(usersService, environment, authenticationManager());
         //authenticationFilter.setAuthenticationManager(authenticationManager());
         authenticationFilter.setFilterProcessesUrl(environment.getProperty("login.url.path"));
+
         return authenticationFilter;
     }
 

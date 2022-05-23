@@ -23,9 +23,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-
-
-
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private UserService userService;
@@ -41,21 +38,23 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
         try {
-            LoginRequestModel creds = new ObjectMapper().readValue(req.getInputStream(), LoginRequestModel.class);
+            LoginRequestModel creds = new ObjectMapper()
+                    .readValue(req.getInputStream(), LoginRequestModel.class);
 
             return getAuthenticationManager().authenticate(
                     new UsernamePasswordAuthenticationToken(
                             creds.getEmail(),
                             creds.getPassword(),
-                            new ArrayList<>()
-                    )
+                            new ArrayList<>())
             );
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain, Authentication auth) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest req,
+                                            HttpServletResponse res,
+                                            FilterChain chain, Authentication auth) throws IOException, ServletException {
         String userName = ((User) auth.getPrincipal()).getUsername();
 
         UserDto userDetails = userService.getUserDetailsByEmail(userName);
