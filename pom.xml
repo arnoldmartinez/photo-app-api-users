@@ -93,6 +93,17 @@
                 <artifactId>jjwt</artifactId>
                 <version>0.9.1</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-config</artifactId>
+            </dependency>
+            <!--In newer versions, please add the following dependency as well-->
+            <!--And the following property to application.properties file: -->
+            <!--spring.config.import=optional:configserver:http://localhost:8012 -->
+            <!--<dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
