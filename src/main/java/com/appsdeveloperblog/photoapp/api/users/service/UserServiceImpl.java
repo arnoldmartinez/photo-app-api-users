@@ -62,4 +62,15 @@ public class UserServiceImpl implements UserService {
 
         return new ModelMapper().map(userEntity, UserDto.class);
     }
+
+    @Override
+    public UserDto getUserByUserId(String userId) {
+        UserEntity userEntity = usersRepository.findByUserId(userId);
+
+        if (userEntity == null) throw new UserServiceException("User not found");
+
+        UserDto userDto = new ModelMapper().map(userEntity, UserDto.class);
+
+        return userDto;
+    }
 }
