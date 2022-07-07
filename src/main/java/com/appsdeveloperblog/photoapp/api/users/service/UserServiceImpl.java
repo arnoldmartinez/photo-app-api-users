@@ -5,7 +5,6 @@ import com.appsdeveloperblog.photoapp.api.users.data.UserEntity;
 import com.appsdeveloperblog.photoapp.api.users.data.UsersRepository;
 import com.appsdeveloperblog.photoapp.api.users.shared.UserDto;
 import com.appsdeveloperblog.photoapp.api.users.ui.model.AlbumResponseModel;
-import feign.FeignException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
@@ -93,13 +92,7 @@ public class UserServiceImpl implements UserService {
 
         List<AlbumResponseModel> albumsList = albumsListResponse.getBody();*/
 
-        List<AlbumResponseModel> albumsList = null;
-
-        try {
-            albumsList = albumsServiceClient.getAlbums(userId);
-        } catch (FeignException e) {
-            logger.error(e.getLocalizedMessage());
-        }
+        List<AlbumResponseModel>  albumsList = albumsServiceClient.getAlbums(userId);
 
         userDto.setAlbums(albumsList);
 
