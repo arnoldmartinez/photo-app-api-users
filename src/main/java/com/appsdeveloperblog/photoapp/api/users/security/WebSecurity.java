@@ -32,11 +32,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/**").hasIpAddress(environment.getProperty("gateway.ip"))
+                .antMatchers(HttpMethod.POST, "/users").hasIpAddress(environment.getProperty("gateway.ip"))
                 .antMatchers(HttpMethod.GET, "/actuator/health").hasIpAddress(environment.getProperty("gateway.ip"))
                 .antMatchers(HttpMethod.GET, "/actuator/circuitbreakerevents").hasIpAddress(environment.getProperty("gateway.ip"))
+                .antMatchers("/h2-console/**").permitAll()
+                .anyRequest().authenticated()
         .and()
-        .addFilter(getAuthenticationFilter());
+        .addFilter(new AuthorizationFilter(authenticationManager(), environment));
         http.headers().frameOptions().disable();
     }
 
